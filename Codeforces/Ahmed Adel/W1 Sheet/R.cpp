@@ -20,31 +20,19 @@ typedef long double ld;
 typedef unsigned long long llu;
 typedef short int si;
 #define MOD 1000000007
-struct point{
-	ld x, y;
-};
-typedef struct point p;
-ld dis(ld x1, ld y1, ld x2, ld y2){
-	x1 = abs(x1-x2);
-	y1 = abs(y1-y2);
-	return ((x1*x1+y1*y1));
-}
 int solve(){
   //TODO tests()  solve() //
     // !Start Here! */
-    p a; int ind = 0;
-    p arr[3]; 
-    cin >> a.x >> a.y;
-    ld mindis = INT_MAX;
-    forn(i, 0, 3){
-    	cin >> arr[i].x >> arr[i].y;
-    	if (dis(arr[i].x, arr[i].y, a.x, a.y) < mindis){
-    		mindis = dis(arr[i].x, arr[i].y, a.x, a.y);
-    		ind = i;
-    	}
-    }
-    cout << mindis << '\n' << (int)arr[ind].x << ' ' << (int)arr[ind].y;
-    
+    ll n, m, mn = LLONG_MAX, res[2]; cin >> n >> m;
+	forn(i, 0, 3){
+		ll l, r; cin >> l >> r;	
+		ll cal = (n-l)*(n-l)+(m-r)*(m-r);
+		if (mn > cal){
+			mn = cal;
+			res[0] = l; res[1] = r;
+		}
+	}
+	cout << mn << '\n' << res[0] << ' ' << res[1];
     // !Stop Here! */
     return 0;
 }

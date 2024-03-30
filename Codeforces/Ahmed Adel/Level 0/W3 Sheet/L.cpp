@@ -1,7 +1,7 @@
-// J. Good Subsequence
+// L. Serve the Dishes
 // Codeforces - Week 3 Sheet
-// https://codeforces.com/group/42BcTs2lav/contest/406937/problem/J
-// 2024-03-29 08:35:54
+// https://codeforces.com/group/42BcTs2lav/contest/406937/problem/L
+// 2024-03-29 10:05:02
 
 #include<bits/stdc++.h>
 using namespace std;
@@ -9,7 +9,7 @@ using namespace std;
 #define rall(x) (x).rbegin(),(x).rend()
 #define each(a, x) for (auto &a : x)
 #define ys cout << "YES";
-#define ns cout << "NO";
+#define ns cout << iostream"NO";
 #define F first
 #define S second
 #define pb emplace_back
@@ -23,19 +23,31 @@ typedef short int si;
 #define forn(i,a,b) for(llu i=(llu)(a);i<(llu)(b);i++)
 #define rofn(i,a,b) for(llu i=(llu)(a);i>(llu)(b);i--)
 const ll MOD {1000000007};
+int bind(string s){
+	int res = 0;
+	int p = 0;
+	for (auto it = s.rbegin(); it != s.rend(); it++, p++){
+		if (*it == '1') res += (int)pow(2, p);
+	} return res;
+}
 si solve(){
-    string s1, s2; cin >> s1 >> s2; 
-    bool f = 1;
-    if (s2.size() > s1.size()) return (cout << "NO "), 0;
-    stack<char> q1, q2;
-    each(ch, s1) q1.push(ch);
-    each(ch, s2) q2.push(ch);
-    while(!q1.empty()){
-    	if (q1.top() == q2.top()) q2.pop();
-    	q1.pop();
-    	if (!q2.size()) return (cout << "YES"), 0;
+    int n; char a, b; cin >> n >> a >> b;
+    vector<int> nums;
+    forn(i, 0, n){
+    	string s; cin >> s;
+    	nums.pb(bind(s));
     }
-    return (cout << "NO "), 0;
+    sort(all(nums));
+    if (a == 'D') reverse(all(nums));
+    // each(x, nums) cout << x << ' ';
+    string t; cin >> t;
+    sort(all(t));
+    if (b == 'D') reverse(all(t));
+    auto it = t.begin(); auto vt = nums.begin();
+    for (; it != t.end(); ++it, vt++){
+    	cout << (*it) << (*vt) << ' ';
+    }
+    
 }
 int32_t main(){
     ios_base::sync_with_stdio(0);cin.tie(0);

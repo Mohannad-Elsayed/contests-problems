@@ -23,11 +23,11 @@ typedef short int si;
 int solve(){
   //TODO tests()  solve() //
     // !Start Here! */
-    ld s, t, c;
+    ll s, t; ld c;
     cin >> s >> t >> c;
     s *=4;
     t *=3;
-    c *= 2*3.1413;
+    c *= 2*(ld)3.141592653;
 	if (s>t && s>c){
 		cout << "Square " << s;
 	}

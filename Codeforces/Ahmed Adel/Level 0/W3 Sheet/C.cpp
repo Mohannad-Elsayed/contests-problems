@@ -24,33 +24,42 @@ typedef short int si;
 #define rofn(i,a,b) for(llu i=(llu)(a);i>(llu)(b);i--)
 const ll MOD {1000000007};
 si solve(){
-    /*
-    	check freq for both, if first == second in all:
-    		array
-    	first > second
-    		 check substr ?  automaton : both
-		else
-			need tree
-    */
     string s, t; cin >> s >> t;
-    vector<int> f1(256), f2(256);
-    each(ch, s) f1[ch]++;
-    each(ch, t) f2[ch]++;
-    bool firstequal=true, firstbig=false, sub=false, no=false;
-    forn(i, 95, 130){
-    	if (f1[i] > f2[i]){ firstbig = true; firstequal = false;}
-    	if (f1[i] < f2[i]) no = true;
-    }
-    if (no || s.size() < t.size()) return (cout << "need tree"), 0;
-    if (firstequal) return (cout << "array"), 0;
-    forn(i, 0, s.size()-t.size()){
-    	bool f = true; int curr = i;
-    	forn(j, 0, t.size()){
-    		if (s[curr++] != t[j]) {f = false; break;}
+    stack<char> ss, tt; 
+    each(ch, s) ss.push(ch);
+    each(ch, t) tt.push(ch);
+    
+    //check size, if t > s, it's need tree
+    // then check subsequence
+    bool sub = false;
+    if (s.size() < t.size()) return (cout <<"need tree"), 0;
+    else {
+    	while(!ss.empty()){
+    		if (ss.top() == tt.top()) tt.pop();
+    		if (tt.empty()) break;
+    		ss.pop();
     	}
-    	if (f) {sub = true; break;}
+    	if (tt.empty()) sub = 1;	
     }
-    cout << (sub ? "automaton" : "both");
+    // if t is a subsequence of s, then it's automaton
+    if (sub) return (cout << "automaton"), 0;
+    
+    int es = (s.size() == t.size()), bf = 0;
+    int frs[256]{}, frt[256]{};
+    each(ch, s) frs[ch]++;
+    each(ch, t) frt[ch]++;
+    forn(i, 95, 124){
+    	if (frt[i] > frs[i]) bf = 1;
+    }
+    
+    // if a character is more frequent in t than in s, it's need tree
+    if (bf) return (cout <<"need tree"), 0;
+    
+    // if their sizes are equal, it's array (implies same frequency)
+    if (es) return (cout << "array"), 0;
+    
+    // here, their sizes are not equal (s > t) need removal and rearrangement
+    return (cout << "both"), 0;
 }
 int32_t main(){
     ios_base::sync_with_stdio(0);cin.tie(0);

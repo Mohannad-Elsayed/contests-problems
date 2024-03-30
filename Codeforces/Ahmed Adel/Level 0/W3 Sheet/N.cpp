@@ -1,7 +1,7 @@
-// J. Good Subsequence
+// N. Secret Code
 // Codeforces - Week 3 Sheet
-// https://codeforces.com/group/42BcTs2lav/contest/406937/problem/J
-// 2024-03-29 08:35:54
+// https://codeforces.com/group/42BcTs2lav/contest/406937/problem/N
+// 2024-03-29 11:30:16
 
 #include<bits/stdc++.h>
 using namespace std;
@@ -9,7 +9,7 @@ using namespace std;
 #define rall(x) (x).rbegin(),(x).rend()
 #define each(a, x) for (auto &a : x)
 #define ys cout << "YES";
-#define ns cout << "NO";
+#define ns cout << iostream"NO";
 #define F first
 #define S second
 #define pb emplace_back
@@ -24,18 +24,14 @@ typedef short int si;
 #define rofn(i,a,b) for(llu i=(llu)(a);i>(llu)(b);i--)
 const ll MOD {1000000007};
 si solve(){
-    string s1, s2; cin >> s1 >> s2; 
-    bool f = 1;
-    if (s2.size() > s1.size()) return (cout << "NO "), 0;
-    stack<char> q1, q2;
-    each(ch, s1) q1.push(ch);
-    each(ch, s2) q2.push(ch);
-    while(!q1.empty()){
-    	if (q1.top() == q2.top()) q2.pop();
-    	q1.pop();
-    	if (!q2.size()) return (cout << "YES"), 0;
+    ll res = 0, n, tmp; cin >> n;
+    forn(i, 0, n){
+    	forn(j, 0, n){
+    		cin >> tmp;
+    		if(i==j) res+= tmp;
+    	}
     }
-    return (cout << "NO "), 0;
+    cout << res;
 }
 int32_t main(){
     ios_base::sync_with_stdio(0);cin.tie(0);

@@ -22,22 +22,50 @@ typedef unsigned long long llu;
 typedef short int si;
 #define forn(i,a,b) for(llu i=(llu)(a);i<(llu)(b);i++)
 #define rofn(i,a,b) for(llu i=(llu)(a);i>(llu)(b);i--)
-int dx[4] = {1, 0, -1,  0}, 
-dy[4] =     {0, 1,  0, -1};
+int dx[4] = {0, 0, -1,  1}, 
+    dy[4] = {-1, 1,  0, 0};
 const ll MOD {1000000007};
+void p(int i, int j){
+	cout << i+1 << ' ' << j+1 << '\n';
+}
 si solve(){
     int n, m; cin >> n >> m;
-	vector<pair<int, int>> v;
+	set<pair<int, int>> vis;
+	int li, lj;
 	char arr[n][m];
 	forn(i, 0, n){
 		forn(j, 0, m){
 			cin >> arr[i][j];
 			if (arr[i][j] == 'S'){
-				v.emplace_back(make_pair(i, j));
+				p(i, j);
+				vis.insert({i, j});
+				li = i, lj = j;
 			}
 		}
 	}
-	
+	int iters = 500*500;
+	while(iters--){
+		// cout << "\n" << li << ' ' << lj << '\n';
+		forn(i, 0, 4){
+			int nx = li, ny = lj;
+			nx += dx[i];
+			ny += dy[i];
+			// cout << "here " << nx << ' ' << dx[i] << ' ' << ny << ' ' << dy[i] << '\n';
+			if (nx >= n || nx < 0 || ny >= m || ny < 0 || vis.count(make_pair(nx, ny))) continue;
+			if (arr[nx][ny] == '*'){
+				p(nx, ny);
+				vis.insert(make_pair(nx, ny));
+				li =  nx, lj = ny;
+				break;
+			}
+			if (arr[nx][ny] == 'O'){
+				p(nx, ny);
+				return 0;
+			}
+		}
+		// cout << "\n\n";
+	}
+	return 0;
 }
 int32_t main(){
     ios_base::sync_with_stdio(0);cin.tie(0);

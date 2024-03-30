@@ -25,9 +25,14 @@ typedef short int si;
 const ll MOD {1000000007};
 si solve(){
     string s; cin >> s;
-    int r{},b{},g{};
-    each(c,s) c=='R' ? r++ : (c=='B' ? b++ : g++);
-    printf("Red stones = %d\nBlue stones = %d\nGreen stones = %d", r, g, b);
+    int r = 0, g = 0, b = 0;
+    each(ch, s){
+    	if (ch == 'R') r++;
+    	else if (ch == 'G') g++;
+    	else b++;
+    }
+    cout << "Red stones = " << r << "\nBlue stones = "
+    	 << b << "\nGreen stones = " << g;
 }
 int32_t main(){
     // ios_base::sync_with_stdio(0);cin.tie(0);

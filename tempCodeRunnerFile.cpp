@@ -1,1 +1,0 @@
-cnt + stk.size()

@@ -1,4 +1,4 @@
-// Mountain Scenery
+// A. Help Vasilisa the Wise 2
 
 #include<bits/stdc++.h>
 using namespace std;
@@ -8,26 +8,41 @@ int dy[8] = {-1, 0, 1, -1, 1, -1, 0, 1};
 
 int main(){
     ios_base::sync_with_stdio(0);cin.tie(0); 
-    int n, k; cin >> n >> k;
-    int arr[2*n+1];
-    for (int i = 0; i<2*n+1; i++) cin >> arr[i];
-    for (int i = 1; i<2*n+1, k; i+=2){
-        if (arr[i]-1 > arr[i+1] && arr[i]-1 > arr[i-1]){
-            arr[i]--;
-            k--;
+    int r1, r2, c1, c2, d1, d2; 
+    cin >> r1 >> r2 >> c1 >> c2 >> d1 >> d2;
+    for (int xx = 1; xx <= 9; xx++){
+        for (int xy = 1; xy <= 9; xy++){
+            for (int yx = 1; yx <=9; yx++){
+                for (int yy = 1; yy<=9; yy++){
+                    set<int> ste;
+                    ste.insert(xx);
+                    ste.insert(xy);
+                    ste.insert(yx);
+                    ste.insert(yy);
+                    if (
+                        xx+yx == c1 &&
+                        xx+xy == r1 &&
+                        xx+yy == d1 &&
+                        xy+yy == c2 &&
+                        yx+yy == r2 &&
+                        xy+yx == d2 && 
+                        ste.size() == 4
+                    )
+                    return (cout << xx << ' ' << xy << '\n' << yx << ' ' << yy), 0;
+                }
+            }
         }
     }
-    for (auto x : arr) cout << x << ' ';
+    cout << -1;
+
     return 0;
 }
 
 /*
 
-3 2
-0 5 3 5 1 5 2
-
-1 1
-0 2 0
+3 7
+4 6
+5 5
 
 
 */

@@ -1,48 +1,61 @@
-// A. Help Vasilisa the Wise 2
+// Battleships UVA - 11953
 
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
-int dx[8] = {-1, -1, -1, 0, 0, 1, 1, 1};
-int dy[8] = {-1, 0, 1, -1, 1, -1, 0, 1};
+char arr[101][101];
+bool vis[101][101];
+int n;
+void dfs(int i, int j){
+    if (i == n || j == n || i < 0 || j < 0 || arr[i][j] == '.' || vis[i][j]) return;
+    vis[i][j] = 1;
+    dfs(i, j+1);
+    dfs(i, j-1);
+    dfs(i+1, j);
+    dfs(i-1, j);
+}
 
 int main(){
-    ios_base::sync_with_stdio(0);cin.tie(0); 
-    int r1, r2, c1, c2, d1, d2; 
-    cin >> r1 >> r2 >> c1 >> c2 >> d1 >> d2;
-    for (int xx = 1; xx <= 9; xx++){
-        for (int xy = 1; xy <= 9; xy++){
-            for (int yx = 1; yx <=9; yx++){
-                for (int yy = 1; yy<=9; yy++){
-                    set<int> ste;
-                    ste.insert(xx);
-                    ste.insert(xy);
-                    ste.insert(yx);
-                    ste.insert(yy);
-                    if (
-                        xx+yx == c1 &&
-                        xx+xy == r1 &&
-                        xx+yy == d1 &&
-                        xy+yy == c2 &&
-                        yx+yy == r2 &&
-                        xy+yx == d2 && 
-                        ste.size() == 4
-                    )
-                    return (cout << xx << ' ' << xy << '\n' << yx << ' ' << yy), 0;
+    // ios_base::sync_with_stdio(0);cin.tie(0); 
+    int tt; cin >> tt;
+    for (int ttt = 1; ttt <= tt; ttt++){
+        cin >> n;
+        int cnt = 0;
+        for (int i = 0; i<n;i++){
+            for (int j=0; j<n; j++){
+                cin >> arr[i][j];
+            }
+        }
+        memset(vis, 0, sizeof(vis));
+        for (int i = 0; i<n;i++){
+            for (int j=0; j<n; j++){
+                if (!vis[i][j] && arr[i][j] == 'x'){
+                    cnt++;
+                    dfs(i, j);
                 }
             }
         }
+        printf("Case %d: %d\n", ttt, cnt);
     }
-    cout << -1;
 
     return 0;
 }
 
 /*
 
-3 7
-4 6
-5 5
+2
+4
+x...
+..x.
+@.@.
+....
+2
+..
+x.
 
+
+
+Case 1: 2
+Case 2: 1
 
 */
